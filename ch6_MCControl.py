@@ -115,7 +115,7 @@ def main():
     env = GridWorld()
     agent = QAgent()
 
-    for n_epi in range(1000): # 총 1,000 에피소드 동안 학습
+    for n_epi in range(5000): # 총 1,000 에피소드 동안 학습
         done = False
         history = []
 

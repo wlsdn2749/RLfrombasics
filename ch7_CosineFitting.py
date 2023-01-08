@@ -33,6 +33,7 @@ def plot_results(model):
     plt.xlim((0, 5))
     plt.ylim((-1, 5))
     plt.grid()
+    plt.show()
 
 def main():
     data_x = np.random.rand(10000) * 5 # 0~5 사이 숫자 1만개를 샘플링하여 인풋으로 사용 
@@ -52,6 +53,8 @@ def main():
         loss.mean().backward() # 역전파를 통한 그라디언트 계산이 일어나는 부분
         optimizer.step() # 실제로 파라미터를 업데이트 하는 부분
 
+        if (step % 1000) == 0:
+            print(step / 100, "% 완료")
     plot_results(model)
 
 if __name__ == '__main__':

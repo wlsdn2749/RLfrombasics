@@ -1,6 +1,6 @@
 import random
 import numpy as np
-
+import time 
 class GridWorld():
     def __init__(self):
         self.x=0
@@ -81,18 +81,29 @@ def main():
     reward = -1
     alpha = 0.01
 
-    for k in range(50000):
-        done = False
-        while not done:
-            x, y = env.get_state()
-            action = agent.select_action()
-            (x_prime, y_prime), reward, done = env.step(action)
-            x_prime, y_prime = env.get_state()
-            data[x][y] = data[x][y] + alpha*(reward+gamma*data[x_prime][y_prime]-data[x][y])
-        env.reset()
+    epochs = [100, 1000, 5000, 25000, 50000]
+    for epoch in epochs:
+        data = [[0,0,0,0],[0,0,0,0],[0,0,0,0],[0,0,0,0]] # epoch별로 달라지는 값을 보기위해 학습된 데이터를 초기화
+        start = time.time()
+        for k in range(epoch):
+            done = False
+            while not done:
+                x, y = env.get_state()
+                action = agent.select_action()
+                (x_prime, y_prime), reward, done = env.step(action)
+                x_prime, y_prime = env.get_state()
+                
+                data[x][y] = data[x][y] + alpha*(reward+gamma*data[x_prime][y_prime]-data[x][y])
+                #V(s_t) = V(s_t) + alpha(r_t+1 + gamma*V(s_t+1) - V(s_t)
+            env.reset()
             
-    for row in data:
-        print(row)
+        
+        print("epoch : " , epoch)   # epoch 별로 수행  
+        for row in data:
+            print(row)
+        end = time.time()
+        print(epoch, ":" , round(end-start, 3))
+        print("\n\n\n")
 
 if __name__ == '__main__':
     main()
