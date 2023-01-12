@@ -1,6 +1,13 @@
 import random
 import numpy as np
 import time 
+
+'''
+    50000기준 
+    MC는 4.4초
+    TD는 5.5초
+    MC가 TD보다 약 20% 빠르다. 
+'''
 class GridWorld():
     def __init__(self):
         self.x=0
