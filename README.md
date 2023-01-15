@@ -21,3 +21,15 @@ Thanks to goodjian7
 (수정 전) r_t+1 + gamma * r_t+1 + ... <br>
 (수정 후) r_t+2 + gamma * r_t+2 + ... <br>
 Thanks to namdori61
+
+
+
+### 1~5 's base line code is same
+#### Difference is ..
+- MCLearning is base
+- TDLearning = not history, instead of G_t
+using next s', a'
+- MCControl = not Value Iteration, using Q_value iteration
+- SARSA (TDControl) = not history, instead of G_t
+using next s', a'
+- Q-learning = Off-Policy, using target greedy-policy maxQ(s', a') is different from behaviour eps-greedy policy Q(s,a)
